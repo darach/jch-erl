@@ -36,7 +36,7 @@ doc:
 
 perf: test
 	clang -c -O3 -ffast-math -std=c99 -I c_src perf/ch.c -o perf/ch.o
-	clang -o -lm perf/ch c_src/jch.o perf/ch.o
+	clang -lm -o perf/ch c_src/jch.o perf/ch.o
 	perf/ch 10000000 10
 	perf/ch 10000000 100
 	perf/ch 10000000 1000
