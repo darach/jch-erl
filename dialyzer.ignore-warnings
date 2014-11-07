@@ -1,0 +1,7 @@
+## NO BLANK LINES
+## 
+erlang:atom_to_list/1
+erlang:get_module_info/1
+erlang:get_module_info/2
+erlang:load_nif/2
+erlang:make_fun/3
