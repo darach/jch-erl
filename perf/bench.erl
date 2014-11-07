@@ -119,19 +119,27 @@ main(_) ->
         ] ),
     c(32,1000000),
     
-    io:format("~n~n~s ~s ~n~n", [ 
-        cake:fg(blue,"- 4096 (4K) Buckets. 100M hashes"),
-        cake:fg(green,"Uniform Distribution Check.")
-        ] ),
-    c(4096,100000000),
+    erlang:garbage_collect(),
     
     io:format("~n~n~s ~s ~n~n", [ 
-        cake:fg(blue,"-  131062 (128K) Buckets. 100M hashes"),
+        cake:fg(blue,"- 32 Buckets. 5M hashes"),
         cake:fg(green,"Uniform Distribution Check.")
         ] ),
-    c(131072,100000000),
+    c(32,5000000),
     
-    ok.
+    erlang:garbage_collect(),
+    
+    io:format("~n~n~s ~s ~n~n", [ 
+        cake:fg(blue,"- 32 Buckets. 10M hashes"),
+        cake:fg(green,"Uniform Distribution Check.")
+        ] ),
+    c(32,10000000),
+
+    erlang:garbage_collect(),
+   
+    io:format("done!~n"),
+
+    halt(0).
 
 c(B,N) ->
     S = os:timestamp(),

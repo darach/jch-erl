@@ -35,7 +35,8 @@ doc:
 	$(REBAR) doc
 
 perf: test
-	gcc -lm -O3 -std=c99 -I c_src perf/ch.c c_src/jch.o -o perf/ch
+	gcc -c -O3 -ffast-math -std=c99 -I c_src perf/ch.c -o perf/ch.o
+	gcc -lm -o perf/ch c_src/jch.o perf/ch.o
 	perf/ch 10000000 10
 	perf/ch 10000000 100
 	perf/ch 10000000 1000
@@ -44,5 +45,5 @@ perf: test
 	perf/ch 10000000 1000000
 	perf/ch 10000000 10000000
 	perf/ch 10000000 100000000
-	erlc -pa ebin perf/bench.erl -o perf/bench.beam
+	erlc -pa ebin perf/bench.erl
 	ERL_LIBS=deps erl +sfwi 1 +scl false -pa ebin -pa perf -noinput -eval "bench:main([])"
