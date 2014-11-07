@@ -1,0 +1,126 @@
+rebar get-deps compile
+==> cake (get-deps)
+==> recon (get-deps)
+==> jch-erl (get-deps)
+==> cake (compile)
+==> recon (compile)
+==> jch-erl (compile)
+  Checking whether the PLT .plt is up-to-date... no
+    (the PLT .plt was built with an old version of Dialyzer)
+  Compiling some key modules to native code... done in 0m18.16s
+  Rebuilding the information in .plt...
+dialyzer: Analysis failed with error:
+Could not scan the following file(s):
+  Could not get core Erlang code for: /Users/darach/Ubnt/Kerl/r16b02/lib/stdlib-1.19.3/ebin/sofs.beam  Could not get core Erlang code for: /Users/darach/Ubnt/Kerl/r16b02/lib/stdlib-1.19.3/ebin/supervisor.beam  Could not get core Erlang code for: /Users/darach/Ubnt/Kerl/r16b02/lib/stdlib-1.19.3/ebin/erl_lint.beam  Could not get core Erlang code for: /Users/darach/Ubnt/Kerl/r16b02/lib/stdlib-1.19.3/ebin/epp.beam  Could not get core Erlang code for: /Users/darach/Ubnt/Kerl/r16b02/lib/stdlib-1.19.3/ebin/digraph_utils.beam  Could not get core Erlang code for: /Users/darach/Ubnt/Kerl/r16b02/lib/kernel-2.16.3/ebin/rpc.beam
+Last messages in the log cache:
+  Reading files and computing callgraph... 
+rebar skip_deps=true eunit ct
+==> jch-erl (eunit)
+  There were no tests to run.
+==> jch-erl (ct)
+WARN:  test directory not present - skipping
+gcc -c -O3 -ffast-math -std=c99 -I c_src perf/ch.c -o perf/ch.o
+gcc -lm -o perf/ch c_src/jch.o perf/ch.o
+perf/ch 10000000 10
+ch/perf: n: 10000000 b: 10 elapsed: 0.535774 (5357740.000000 hps, 53.577400 nsh).
+perf/ch 10000000 100
+ch/perf: n: 10000000 b: 100 elapsed: 0.894379 (8943790.000000 hps, 89.437900 nsh).
+perf/ch 10000000 1000
+ch/perf: n: 10000000 b: 1000 elapsed: 1.152182 (8679184.364970 hps, 115.218200 nsh).
+perf/ch 10000000 10000
+ch/perf: n: 10000000 b: 10000 elapsed: 1.445336 (6918806.422866 hps, 144.533600 nsh).
+perf/ch 10000000 100000
+ch/perf: n: 10000000 b: 100000 elapsed: 1.720521 (5812192.934582 hps, 172.052100 nsh).
+perf/ch 10000000 1000000
+ch/perf: n: 10000000 b: 1000000 elapsed: 2.014727 (4963451.623967 hps, 201.472700 nsh).
+perf/ch 10000000 10000000
+ch/perf: n: 10000000 b: 10000000 elapsed: 2.271987 (4401433.634964 hps, 227.198700 nsh).
+perf/ch 10000000 100000000
+ch/perf: n: 10000000 b: 100000000 elapsed: 2.548119 (3924463.496407 hps, 254.811900 nsh).
+erlc -pa ebin perf/bench.erl
+ERL_LIBS=deps erl +sfwi 1 +scl false -pa ebin -pa perf -noinput -eval "bench:main([])"
+JCH.  Performance microbenchmark suite. 
+
+warmup    N:          10 Min:  -----0  Max:  ---973  Median: -----0  Avg:  ----98  Elapsed:     2638 
+warmup    N:          10 Min:  -----0  Max:  -----1  Median: -----0  Avg:  -----0  Elapsed:       13 
+warmup    N:          10 Min:  -----0  Max:  -----1  Median: -----0  Avg:  -----1  Elapsed:       12 
+warmup    N:          10 Min:  -----0  Max:  -----1  Median: -----0  Avg:  -----1  Elapsed:       11 
+warmup    N:          10 Min:  -----0  Max:  -----1  Median: -----0  Avg:  -----0  Elapsed:       11 
+warmup    N:          10 Min:  -----0  Max:  -----1  Median: -----0  Avg:  -----0  Elapsed:       11 
+
+- 100 Buckets.  Hash performance. 
+
+ch100     N:          10 Min:  -----0  Max:  -----1  Median: -----0  Avg:  -----0  Elapsed:       10 
+ch100     N:         100 Min:  -----0  Max:  -----1  Median: -----0  Avg:  -----0  Elapsed:       93 
+ch100     N:        1000 Min:  -----0  Max:  -----2  Median: -----0  Avg:  -----0  Elapsed:      941 
+ch100     N:       10000 Min:  -----0  Max:  -----9  Median: -----0  Avg:  -----0  Elapsed:     9147 
+ch100     N:      100000 Min:  -----0  Max:  ----10  Median: -----0  Avg:  -----0  Elapsed:    90432 
+ch100     N:     1000000 Min:  -----0  Max:  ---615  Median: -----0  Avg:  -----0  Elapsed:   924910 
+ch100     N:    10000000 Min:  -----0  Max:  ----87  Median: -----0  Avg:  -----0  Elapsed:  9328152 
+
+
+- 10K Buckets.  Hash performance. 
+
+ch10k     N:          10 Min:  -----0  Max:  -----2  Median: -----0  Avg:  -----1  Elapsed:       16 
+ch10k     N:         100 Min:  -----0  Max:  -----1  Median: -----0  Avg:  -----0  Elapsed:       89 
+ch10k     N:        1000 Min:  -----0  Max:  -----9  Median: -----0  Avg:  -----0  Elapsed:     1095 
+ch10k     N:       10000 Min:  -----0  Max:  -----9  Median: -----0  Avg:  -----0  Elapsed:     8784 
+ch10k     N:      100000 Min:  -----0  Max:  ----54  Median: -----0  Avg:  -----0  Elapsed:    97185 
+ch10k     N:     1000000 Min:  -----0  Max:  ----92  Median: -----0  Avg:  -----0  Elapsed:   888911 
+ch10k     N:    10000000 Min:  -----0  Max:  --2989  Median: -----0  Avg:  -----0  Elapsed: 10026655 
+
+
+- 1M Buckets.  Hash performance. 
+
+ch1m      N:          10 Min:  -----0  Max:  -----3  Median: -----0  Avg:  -----0  Elapsed:       17 
+ch1m      N:         100 Min:  -----0  Max:  -----1  Median: -----0  Avg:  -----0  Elapsed:       94 
+ch1m      N:        1000 Min:  -----0  Max:  -----2  Median: -----0  Avg:  -----0  Elapsed:     1096 
+ch1m      N:       10000 Min:  -----0  Max:  -----3  Median: -----0  Avg:  -----0  Elapsed:     9319 
+ch1m      N:      100000 Min:  -----0  Max:  ----58  Median: -----0  Avg:  -----0  Elapsed:   102992 
+ch1m      N:     1000000 Min:  -----0  Max:  ----24  Median: -----0  Avg:  -----0  Elapsed:   941804 
+ch1m      N:    10000000 Min:  -----0  Max:  --3107  Median: -----0  Avg:  -----0  Elapsed: 10597189 
+
+
+- 1B Buckets.  Hash performance. 
+
+ch1b      N:          10 Min:  -----1  Max:  -----2  Median: -----1  Avg:  -----1  Elapsed:       16 
+ch1b      N:         100 Min:  -----0  Max:  -----1  Median: -----1  Avg:  -----1  Elapsed:      102 
+ch1b      N:        1000 Min:  -----0  Max:  -----9  Median: -----0  Avg:  -----0  Elapsed:     1178 
+ch1b      N:       10000 Min:  -----0  Max:  ----13  Median: -----0  Avg:  -----0  Elapsed:    10146 
+ch1b      N:      100000 Min:  -----0  Max:  ----59  Median: -----0  Avg:  -----0  Elapsed:   109772 
+ch1b      N:     1000000 Min:  -----0  Max:  ---886  Median: -----0  Avg:  -----0  Elapsed:  1048561 
+ch1b      N:    10000000 Min:  -----0  Max:  --3734  Median: -----0  Avg:  -----0  Elapsed: 11757297 
+
+
+- 32 Buckets. 1M hashes Uniform Distribution Check. 
+
+31154      31240      31211      31471      31355      31312      31127      31305     
+30953      31338      31155      31125      31264      31207      31215      31064     
+31225      31333      31456      31354      30981      31214      31449      31511     
+31314      31075      31037      31315      31191      31378      31374      31297     
+oOo|      Min:  -30953  Max:  -31511  Median: -31240  Avg:  -31250  Elapsed:  1742950
+   Worst:  98.2292  Med:    99.1400 Avg:    99.1717 RSD:      2.5097
+
+
+
+- 32 Buckets. 5M hashes Uniform Distribution Check. 
+
+156495      156043      156477      156441      157210      156088      155237      156385     
+155428      156491      156306      155585      156809      156082      156001      156068     
+156244      156419      156351      155907      155852      156712      156222      156310     
+156471      155939      156291      156325      156725      155899      156631      156556     
+oOo|      Min:  155237  Max:  157210  Median: 156306  Avg:  156250  Elapsed:  8448010
+   Worst:  98.7450  Med:    99.4250 Avg:    99.3894 RSD:      1.4412
+
+
+
+- 32 Buckets. 10M hashes Uniform Distribution Check. 
+
+312292      312457      312660      312522      313805      311987      311431      312299     
+311975      312834      312233      312125      313391      312222      312170      312389     
+311811      313134      312986      312434      312002      313060      312784      312699     
+312114      312170      312385      312721      313163      311883      313060      312802     
+oOo|      Min:  311431  Max:  313805  Median: 312389  Avg:  312500  Elapsed: 15748372
+   Worst:  99.2435  Med:    99.5488 Avg:    99.5841 RSD:      0.9139
+
+done!
