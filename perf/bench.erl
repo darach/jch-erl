@@ -31,7 +31,7 @@ main(_) ->
     % tunables
     process_flag(priority, max),
     % reduces outliers for purpose of the micro benchmark
-    process_flag(min_heap_size, trunc(math:pow(2,32))),
+    process_flag(min_heap_size, trunc(math:pow(2,30))),
     %dbg:tracer(port,dbg:trace_port(file,"binary_gc.dump")),
     %dbg:p(self(),[garbage_collection,timestamp]),
 
