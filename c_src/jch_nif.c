@@ -28,7 +28,7 @@ static ERL_NIF_TERM jch_chash(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[
     unsigned int num_buckets;
 
     if (argc != 2 ||
-        !enif_get_ulong(env, argv[0], &key) ||
+        !enif_get_uint64(env, argv[0], &key) ||
         !enif_get_uint(env, argv[1], &num_buckets) ||
         num_buckets < 1)
     {
