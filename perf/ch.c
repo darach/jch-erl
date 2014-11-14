@@ -19,6 +19,7 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
@@ -38,7 +39,7 @@ int main(int argc, char** argv)
 
     struct timeval s, e;
     gettimeofday(&s,NULL);
-    for (int i = 0; i < n; i++)
+    for (uint64_t i = 0; i < n; i++)
     {
         _jch_chash(i, b);
     }

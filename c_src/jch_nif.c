@@ -19,12 +19,13 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#include <stdint.h>
 #include "erl_nif.h"
 #include "jch.h"
 
 static ERL_NIF_TERM jch_chash(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
-    unsigned long key;
+    uint64_t key;
     unsigned int num_buckets;
 
     if (argc != 2 ||

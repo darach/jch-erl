@@ -19,11 +19,12 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#include <stdint.h>
 #include <limits.h>
 #include "math.h"
 
 // a reasonably fast, good period, low memory use, xorshift64* based prng
-double lcg_next(unsigned long* x)
+inline double lcg_next(uint64_t* x)
 {
     *x ^= *x >> 12; // a
     *x ^= *x << 25; // b
@@ -32,9 +33,9 @@ double lcg_next(unsigned long* x)
 }
 
 // jump consistent hash
-int _jch_chash(unsigned long key, unsigned int num_buckets)
+int _jch_chash(uint64_t key, unsigned int num_buckets)
 {
-    unsigned long seed = key; int b = -1; int j = 0;
+    uint64_t seed = key; int b = -1; int j = 0;
 
     do {
         b = j;
