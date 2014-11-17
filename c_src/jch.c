@@ -24,7 +24,7 @@
 #include "math.h"
 
 // a reasonably fast, good period, low memory use, xorshift64* based prng
-inline double lcg_next(uint64_t* x)
+double lcg_next(uint64_t* x)
 {
     *x ^= *x >> 12; // a
     *x ^= *x << 25; // b
