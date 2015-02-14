@@ -9,6 +9,15 @@ This implementation uses the xorshift64\* pseudo-random number generator rather 
 the linear congruential generator in the paper as it is reasonably fast but, more importantly,
 memory efficient.
 
+Performance results (via Travis CI) for
+
+* Erlang/OTP 17.1 - https://travis-ci.org/darach/jch-erl/jobs/50712346
+* Erlang/OTP 17.0 - https://travis-ci.org/darach/jch-erl/jobs/50712347
+* Erlang/OTP R16BB03 - https://travis-ci.org/darach/jch-erl/jobs/50712348
+* Erlang/OTP R16B02 - https://travis-ci.org/darach/jch-erl/jobs/50712349
+* Erlang/OTP R16B01 - https://travis-ci.org/darach/jch-erl/jobs/50712350
+* Note. Some tests were disabled as they were too strenuous for travis, resulting in build failure! (Ha ha!)
+
 ### Usage
 
 A single function ```jch:ch/2``` is offered. Simply pass in a 64 bit long (or less) integer
