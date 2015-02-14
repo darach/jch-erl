@@ -67,7 +67,7 @@ main(_) ->
     b(jch,ch, fun() -> [random:uniform(1000000000),100] end, 10000, "ch100"),
     b(jch,ch, fun() -> [random:uniform(1000000000),100] end, 100000, "ch100"),
     b(jch,ch, fun() -> [random:uniform(1000000000),100] end, 1000000, "ch100"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),100] end, 10000000, "ch100"),
+    %b(jch,ch, fun() -> [random:uniform(1000000000),100] end, 10000000, "ch100"),
 
     io:format("~n~n~s ~s ~n~n", [ 
         cake:fg(blue,"- 10K Buckets. "),
@@ -79,7 +79,7 @@ main(_) ->
     b(jch,ch, fun() -> [random:uniform(1000000000),10000] end, 10000, "ch10k"),
     b(jch,ch, fun() -> [random:uniform(1000000000),10000] end, 100000, "ch10k"),
     b(jch,ch, fun() -> [random:uniform(1000000000),10000] end, 1000000, "ch10k"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),10000] end, 10000000, "ch10k"),
+    %b(jch,ch, fun() -> [random:uniform(1000000000),10000] end, 10000000, "ch10k"),
 
     io:format("~n~n~s ~s ~n~n", [ 
         cake:fg(blue,"- 1M Buckets. "),
@@ -91,7 +91,7 @@ main(_) ->
     b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 10000, "ch1m"),
     b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 100000, "ch1m"),
     b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 1000000, "ch1m"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 10000000, "ch1m"),
+    %b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 10000000, "ch1m"),
 
     io:format("~n~n~s ~s ~n~n", [ 
         cake:fg(blue,"- 1B Buckets. "),
@@ -103,7 +103,7 @@ main(_) ->
     b(jch,ch, fun() -> [random:uniform(1000000000),1000000000] end, 10000, "ch1b"),
     b(jch,ch, fun() -> [random:uniform(1000000000),1000000000] end, 100000, "ch1b"),
     b(jch,ch, fun() -> [random:uniform(1000000000),1000000000] end, 1000000, "ch1b"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000000] end, 10000000, "ch1b"),
+    %b(jch,ch, fun() -> [random:uniform(1000000000),1000000000] end, 10000000, "ch1b"),
 
     %dbg:stop(),
 
