@@ -1,4 +1,4 @@
-**jch-erl**
+**jch-erl** [![Build Status](https://travis-ci.org/darach/jch-erl.svg?branch=master)](https://travis-ci.org/darach/jch-erl)
 
 Jump Consistent Hashing Library
 
