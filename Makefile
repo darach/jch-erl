@@ -45,5 +45,5 @@ perf: test
 	perf/ch 10000000 1000000
 	perf/ch 10000000 10000000
 	perf/ch 10000000 100000000
-	erlc -pa ebin perf/bench.erl
+	erlc -pa ebin -o perf perf/bench.erl
 	ERL_LIBS=deps erl +sfwi 1 +scl false -pa ebin -pa perf -noinput -eval "bench:main([])"
