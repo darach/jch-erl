@@ -48,3 +48,26 @@ init() ->
     Hash :: integer().
 ch(_Key,_Buckets) when is_integer(_Key) ->
     erlang:nif_error({nif_not_loaded, ?MODULE}).
+
+
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+
+ch_xorshift_test_() ->
+    Cases =
+        %% {Expect, Key, Buckets}
+        [{0, 0, 1},
+         {0, 3, 1},
+         {0, 0, 2},
+         {1, 2, 2},
+         {0, 4, 2},
+         {29, 1, 128},
+         {113, 129, 128},
+         {0, 0, 100000000},
+         {82916011, 128, 100000000},
+         {239467867, 128, 2147483648},
+         {78, 18446744073709551615, 128}
+        ],
+    [?_assertEqual(Expect, jch:ch(K, B)) || {Expect, K, B} <- Cases].
+
+-endif.
