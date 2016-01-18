@@ -5,12 +5,13 @@ Jump Consistent Hashing Library
 NIF wrapper for Jump Consistent Hash algorithm by John Lamping and Eric Veach
 developed at Google, Inc. Paper: ["A Fast, Minimal Memory, Consistent Hash Algorithm](http://arxiv.org/ftp/arxiv/papers/1406/1406.2294.pdf).
 
-This implementation uses the xorshift64\* pseudo-random number generator rather than
-the linear congruential generator in the paper as it is reasonably fast but, more importantly,
-memory efficient.
+This library have 2 implementations: the xorshift64\* pseudo-random number generator and
+the linear congruential random generator as in the paper. First one is reasonably fast but, more importantly,
+memory efficient. Second one is compatible with implementations in other languages.
 
 Performance results (via Travis CI) for
 
+* Erlang/OTP 18.2 - TODO
 * Erlang/OTP 17.1 - https://travis-ci.org/darach/jch-erl/jobs/50712346
 * Erlang/OTP 17.0 - https://travis-ci.org/darach/jch-erl/jobs/50712347
 * Erlang/OTP R16BB03 - https://travis-ci.org/darach/jch-erl/jobs/50712348
@@ -20,9 +21,10 @@ Performance results (via Travis CI) for
 
 ### Usage
 
-A single function ```jch:ch/2``` is offered. Simply pass in a 64 bit long (or less) integer
+Two functions `jch:ch/2` and `jch:ch/3` are offered. Simply pass in a 64 bit long (or less) integer
 key argument followed by the desired bucket or continuum partition size. The function returns the
-partition allocated for the key.
+partition allocated for the key. Optional 3'rd argument is atom `orig` to use compatible algorithm
+or atom `xorshift64` to use more eficient algorithm.
 
 Performance is very stable as bucket size increases and distribrution across the
 ring is stable (standard deviation for a reasonable sample size is typically <5%
@@ -40,14 +42,16 @@ Eshell V5.10.3  (abort with ^G)
 121
 3> jch:ch(13,128).
 121
-4> jch:ch(trunc(math:pow(2,64))-1,128).
+4> jch:ch(13, 128, orig).
+56
+5> jch:ch(trunc(math:pow(2,64))-1,128).
 78
-5> jch:ch(trunc(math:pow(2,64)),128). %% off by 1 mate
+6> jch:ch(trunc(math:pow(2,64)),128). %% off by 1 mate
 ** exception error: bad argument
      in function  jch:ch/2
         called as jch:ch(18446744073709551616,128)
-6> %% off by 1 mate
-6>
+7> %% off by 1 mate
+7>
 ```
 
 Enjoy!
