@@ -35,7 +35,7 @@ doc:
 	$(REBAR) doc
 
 perf: test
-	gcc -c -O3 -ffast-math -m64 -std=c99 -I c_src perf/ch.c -o perf/ch.o
+	gcc -c -O3 -ffast-math -std=c99 -I c_src perf/ch.c -o perf/ch.o
 	gcc -o perf/ch c_src/jch.o perf/ch.o -lm
 	perf/ch 10000000 10
 	perf/ch 10000000 100

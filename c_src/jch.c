@@ -29,13 +29,13 @@ double lcg_next(uint64_t* x)
     *x ^= *x >> 12; // a
     *x ^= *x << 25; // b
     *x ^= *x >> 27; // c
-    return (double)(*x * 2685821657736338717LL) / ULONG_MAX;
+    return (double)(*x * 2685821657736338717ULL) / ULLONG_MAX;
 }
 
 // jump consistent hash
-int _jch_chash(uint64_t key, unsigned int num_buckets)
+int32_t _jch_chash(uint64_t key, uint32_t num_buckets)
 {
-    uint64_t seed = key; int b = -1; int j = 0;
+    uint64_t seed = key; int32_t b = -1; int32_t j = 0;
 
     do {
         b = j;
@@ -44,4 +44,19 @@ int _jch_chash(uint64_t key, unsigned int num_buckets)
     } while(j < num_buckets);
 
     return b;
+}
+
+
+// Implementation from original article, compatible with
+// most implementations in other languages.
+int32_t _jch_chash_orig(uint64_t key, uint32_t num_buckets) {
+  int64_t b = -1, j = 0;
+
+  while (j < num_buckets) {
+    b = j;
+    key = key * 2862933555777941757ULL + 1;
+    j = (b + 1) * ((double)(1LL << 31) / (double)((key >> 33) + 1));
+  }
+
+  return (int32_t)b;
 }

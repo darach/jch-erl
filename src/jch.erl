@@ -24,12 +24,14 @@
 %%
 %% NIF wrapper for Jump Consistent Hash algorithm by John Lamping and Eric Veach
 %% developed at Google, Inc. Paper: "A Fast, Minimal Memory, Consistent Hash Algorithm.
-%% This implementation uses the xorshift64* PRNG rather than the LCG PRNG in the paper.
+%% This implementation uses the xorshift64* PRNG rather than the LCG PRNG in the paper
+%% by default, but can be switched to compatible algorithm by passing 3'rd argument
+%% as atom 'orig'.
 %%
 %% -------------------------------------------------------------------
 
 -module(jch).
--export([ch/2]).
+-export([ch/2, ch/3]).
 -on_load(init/0).
 
 init() ->
@@ -46,7 +48,18 @@ init() ->
     Key :: integer(),
     Buckets :: integer(),
     Hash :: integer().
-ch(_Key,_Buckets) when is_integer(_Key) ->
+ch(Key, Buckets) ->
+    ch(Key, Buckets, xorshift64).
+
+
+-spec ch(Key, Buckets, Type) -> Hash when
+    Key :: integer(),
+    Buckets :: integer(),
+    Type :: orig | xorshift64,
+    Hash :: integer().
+ch(Key, Buckets, Type) when is_integer(Key) andalso (Key >= 0)
+                            andalso  is_integer(Buckets) andalso (Buckets > 0)
+                            andalso ((Type == orig) or (Type == xorshift64)) ->
     erlang:nif_error({nif_not_loaded, ?MODULE}).
 
 
@@ -69,5 +82,22 @@ ch_xorshift_test_() ->
          {78, 18446744073709551615, 128}
         ],
     [?_assertEqual(Expect, jch:ch(K, B)) || {Expect, K, B} <- Cases].
+
+ch_orig_test_() ->
+    Cases =
+        %% {Expect, Key, Buckets}
+        [{0, 0, 1},
+         {0, 3, 1},
+         {0, 0, 2},
+         {1, 4, 2},
+         {0, 7, 2},
+         {55, 1, 128},
+         {120, 129, 128},
+         {0, 0, 100000000},
+         {38172097, 128, 100000000},
+         {1644467860, 128, 2147483648},
+         {92, 18446744073709551615, 128}
+        ],
+    [?_assertEqual(Expect, jch:ch(K, B, orig)) || {Expect, K, B} <- Cases].
 
 -endif.

@@ -26,17 +26,32 @@
 static ERL_NIF_TERM jch_chash(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
     uint64_t key;
-    unsigned int num_buckets;
+    uint32_t num_buckets;
+    unsigned int switch_len;
+    char algorithm[11];
+    int32_t chash;
 
-    if (argc != 2 ||
+    if (argc != 3 ||
         !enif_get_uint64(env, argv[0], &key) ||
         !enif_get_uint(env, argv[1], &num_buckets) ||
+        !enif_get_atom_length(env, argv[2], &switch_len, ERL_NIF_LATIN1) ||
+        switch_len > 10 ||      // orig | xorshift64
+        !enif_get_atom(env, argv[2], algorithm, switch_len + 1, ERL_NIF_LATIN1) ||
         num_buckets < 1)
     {
         return enif_make_badarg(env);
     }
 
-    int chash = _jch_chash(key,num_buckets);
+    switch (*algorithm) {
+    case 'o':                   // orig
+        chash = _jch_chash_orig(key,num_buckets);
+        break;
+    case 'x':                   // xorshift64
+        chash = _jch_chash(key,num_buckets);
+        break;
+    default:
+        return enif_make_badarg(env);
+    }
 
     return enif_make_int(env,chash);
 }
@@ -63,7 +78,7 @@ static void on_unload(ErlNifEnv* env, void* priv_data)
 }
 
 static ErlNifFunc nif_funcs[] = {
-    {"ch", 2, jch_chash}
+    {"ch", 3, jch_chash}
 };
 
 ERL_NIF_INIT(jch, nif_funcs, &on_load, NULL, &on_upgrade, &on_unload)

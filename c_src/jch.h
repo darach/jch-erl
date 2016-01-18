@@ -22,6 +22,7 @@
 #ifndef __JCH_H_
 #define __JCH_H_
 
-int _jch_chash(unsigned long key, unsigned int num_buckets);
+int32_t _jch_chash(uint64_t key, int32_t num_buckets);
+int32_t _jch_chash_orig(uint64_t key, int32_t num_buckets);
 
 #endif
