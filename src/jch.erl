@@ -100,4 +100,23 @@ ch_orig_test_() ->
         ],
     [?_assertEqual(Expect, jch:ch(K, B, orig)) || {Expect, K, B} <- Cases].
 
+
+%% https://github.com/beefsack/jch-rs/blob/master/src/lib.rs#L30
+ch_range_test() ->
+    test_ch_range(orig, 0),
+    test_ch_range(xorshift64, 0).
+
+test_ch_range(_, 10000) -> ok;
+test_ch_range(Algo, Key) ->
+    LastVal = ch(Key, 1),
+    test_ch_range(Algo, Key, LastVal, 1),
+    test_ch_range(Algo, Key + 1).
+
+test_ch_range(_Algo, _Key, _LastVal, 100) -> ok;
+test_ch_range(Algo, Key, LastVal, Buckets) ->
+    Val = ch(Key, Buckets, Algo),
+    %% io:format("ch(~p, ~p, ~p) -> ~p~n", [Key, Buckets, Algo, Val]),
+    ?assert((Val == LastVal) orelse (Val == Buckets - 1)),
+    test_ch_range(Algo, Key, Val, Buckets + 1).
+
 -endif.
