@@ -35,7 +35,7 @@ int main(int argc, char** argv)
     }
 
     unsigned long n = atol(argv[1]);
-    unsigned int b = atoi(argv[2]);
+    uint32_t b = atoi(argv[2]);
 
     struct timeval s, e;
     gettimeofday(&s,NULL);
@@ -49,7 +49,7 @@ int main(int argc, char** argv)
     double en = es * 1e9;
     double hps = (es >= 1.) ? (double)n / es : (double)n * es;
     double nsh = en / n;
-    printf("ch/perf: n: %lu b: %i elapsed: %f (%f hps, %f nsh).\n", n, b, es, hps, nsh);
+    printf("ch/perf: n: %lu b: %u elapsed: %f (%f hps, %f nsh).\n", n, b, es, hps, nsh);
 
     return 0;
 }
