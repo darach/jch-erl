@@ -1,5 +1,5 @@
 %% -------------------------------------------------------------------
-%% Copyright (c) 2014 Darach Ennis < darach at gmail dot com > 
+%% Copyright (c) 2014 Darach Ennis < darach at gmail dot com >
 %%
 %% Permission is hereby granted, free of charge, to any person obtaining a
 %% copy of this software and associated documentation files (the
@@ -31,5 +31,9 @@
   {modules, [ jch ]},
   {registered, []},
   {applications, [ kernel, stdlib ]},
-  {env, []}
+  {env, []},
+
+  {maintainers, ["Darach Ennis"]},
+  {licenses, ["MIT"]},
+  {links, ["https://github.com/darach/jch-erl"]}
  ]}.
