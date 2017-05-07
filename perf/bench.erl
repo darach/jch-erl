@@ -1,5 +1,5 @@
 %% -------------------------------------------------------------------
-%% Copyright (c) 2014 Darach Ennis < darach at gmail dot com > 
+%% Copyright (c) 2014 Darach Ennis < darach at gmail dot com >
 %%
 %% Permission is hereby granted, free of charge, to any person obtaining a
 %% copy of this software and associated documentation files (the
@@ -35,7 +35,7 @@ main(_) ->
     %dbg:tracer(port,dbg:trace_port(file,"binary_gc.dump")),
     %dbg:p(self(),[garbage_collection,timestamp]),
 
-    io:format("~s ~s ~n~n", [ 
+    io:format("~s ~s ~n~n", [
         cake:fg(blue,"JCH. "),
         cake:fg(green,"Performance microbenchmark suite.")
         ] ),
@@ -44,12 +44,12 @@ main(_) ->
     % BEAM warmup. Take care of startup anomalies ...
     %
 
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 10, "warmup"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 10, "warmup"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 10, "warmup"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 10, "warmup"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 10, "warmup"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 10, "warmup"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10, "warmup"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10, "warmup"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10, "warmup"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10, "warmup"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10, "warmup"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10, "warmup"),
 
     %
     % Fundamental performance characteristics by:
@@ -57,53 +57,53 @@ main(_) ->
     % 2. Repeated with increasing bucket sizes
     %
 
-    io:format("~n~s ~s ~n~n", [ 
+    io:format("~n~s ~s ~n~n", [
         cake:fg(blue,"- 100 Buckets. "),
         cake:fg(green,"Hash performance.")
         ] ),
-    b(jch,ch, fun() -> [random:uniform(1000000000),100] end, 10, "ch100"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),100] end, 100, "ch100"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),100] end, 1000, "ch100"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),100] end, 10000, "ch100"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),100] end, 100000, "ch100"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),100] end, 1000000, "ch100"),
-    %b(jch,ch, fun() -> [random:uniform(1000000000),100] end, 10000000, "ch100"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),100] end, 10, "ch100"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),100] end, 100, "ch100"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),100] end, 1000, "ch100"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),100] end, 10000, "ch100"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),100] end, 100000, "ch100"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),100] end, 1000000, "ch100"),
+    %b(jch,ch, fun() -> [rand:uniform(1000000000),100] end, 10000000, "ch100"),
 
-    io:format("~n~n~s ~s ~n~n", [ 
+    io:format("~n~n~s ~s ~n~n", [
         cake:fg(blue,"- 10K Buckets. "),
         cake:fg(green,"Hash performance.")
         ] ),
-    b(jch,ch, fun() -> [random:uniform(1000000000),10000] end, 10, "ch10k"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),10000] end, 100, "ch10k"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),10000] end, 1000, "ch10k"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),10000] end, 10000, "ch10k"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),10000] end, 100000, "ch10k"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),10000] end, 1000000, "ch10k"),
-    %b(jch,ch, fun() -> [random:uniform(1000000000),10000] end, 10000000, "ch10k"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),10000] end, 10, "ch10k"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),10000] end, 100, "ch10k"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),10000] end, 1000, "ch10k"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),10000] end, 10000, "ch10k"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),10000] end, 100000, "ch10k"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),10000] end, 1000000, "ch10k"),
+    %b(jch,ch, fun() -> [rand:uniform(1000000000),10000] end, 10000000, "ch10k"),
 
-    io:format("~n~n~s ~s ~n~n", [ 
+    io:format("~n~n~s ~s ~n~n", [
         cake:fg(blue,"- 1M Buckets. "),
         cake:fg(green,"Hash performance.")
         ] ),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 10, "ch1m"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 100, "ch1m"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 1000, "ch1m"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 10000, "ch1m"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 100000, "ch1m"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 1000000, "ch1m"),
-    %b(jch,ch, fun() -> [random:uniform(1000000000),1000000] end, 10000000, "ch1m"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10, "ch1m"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 100, "ch1m"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 1000, "ch1m"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10000, "ch1m"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 100000, "ch1m"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 1000000, "ch1m"),
+    %b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10000000, "ch1m"),
 
-    io:format("~n~n~s ~s ~n~n", [ 
+    io:format("~n~n~s ~s ~n~n", [
         cake:fg(blue,"- 1B Buckets. "),
         cake:fg(green,"Hash performance.")
         ] ),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000000] end, 10, "ch1b"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000000] end, 100, "ch1b"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000000] end, 1000, "ch1b"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000000] end, 10000, "ch1b"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000000] end, 100000, "ch1b"),
-    b(jch,ch, fun() -> [random:uniform(1000000000),1000000000] end, 1000000, "ch1b"),
-    %b(jch,ch, fun() -> [random:uniform(1000000000),1000000000] end, 10000000, "ch1b"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000000] end, 10, "ch1b"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000000] end, 100, "ch1b"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000000] end, 1000, "ch1b"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000000] end, 10000, "ch1b"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000000] end, 100000, "ch1b"),
+    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000000] end, 1000000, "ch1b"),
+    %b(jch,ch, fun() -> [rand:uniform(1000000000),1000000000] end, 10000000, "ch1b"),
 
     %dbg:stop(),
 
@@ -113,30 +113,30 @@ main(_) ->
     %% ascertaining distribution and dispersion artefacts
     %% statistically. We don't care about speed here.
     %%
-    io:format("~n~n~s ~s ~n~n", [ 
+    io:format("~n~n~s ~s ~n~n", [
         cake:fg(blue,"- 32 Buckets. 1M hashes"),
         cake:fg(green,"Uniform Distribution Check.")
         ] ),
     c(32,1000000),
-    
+
     erlang:garbage_collect(),
-    
-    io:format("~n~n~s ~s ~n~n", [ 
+
+    io:format("~n~n~s ~s ~n~n", [
         cake:fg(blue,"- 32 Buckets. 5M hashes"),
         cake:fg(green,"Uniform Distribution Check.")
         ] ),
     c(32,5000000),
-    
+
     %erlang:garbage_collect(),
     %
-    %io:format("~n~n~s ~s ~n~n", [ 
+    %io:format("~n~n~s ~s ~n~n", [
     %    cake:fg(blue,"- 32 Buckets. 10M hashes"),
     %    cake:fg(green,"Uniform Distribution Check.")
     %    ] ),
     %c(32,10000000),
 
     erlang:garbage_collect(),
-   
+
     io:format("done!~n"),
 
     halt(0).
@@ -163,8 +163,8 @@ c(B,N) ->
     io:format("~s ~s ~s ~s ~s ~s ~s ~s~n", [ cake:fg(white,string:left(io_lib:format("~p", [X]),6)) || X <- L3]),
     io:format("~s ~s ~s ~s ~s ~s ~s ~s~n", [ cake:fg(white,string:left(io_lib:format("~p", [X]),6)) || X <- L4]),
     io:format("~s  ~s~6..-b  ~s~6..-b  ~s~6..-b  ~s~6..-b  ~s~9.. b~n   ~s~.4f  ~s~.4f ~s~.4f ~s~.4f~n~n", [
-        cake:fg(blue,string:left("oOo|",8)), 
-        cake:fg(yellow,string:left("Min: ",6)), Min, 
+        cake:fg(blue,string:left("oOo|",8)),
+        cake:fg(yellow,string:left("Min: ",6)), Min,
         cake:fg(yellow,string:left("Max: ",6)), Max,
         cake:fg(yellow,string:left("Median: ",8)), Med,
         cake:fg(yellow,string:left("Avg: ",6)), Avg,
@@ -181,7 +181,7 @@ tt(X) ->
     fun(I,D) ->
         K = jch:ch(I,X),
         case dict:is_key(K,D) of
-            false -> dict:store(K,1,D); 
+            false -> dict:store(K,1,D);
             true -> dict:store(K,dict:fetch(K,D)+1,D)
         end
     end.
@@ -197,9 +197,9 @@ b(M, F, A, N, X) when N > 0 ->
     Med = lists:nth(round((Length / 2)), lists:sort(L)),
     Avg = round(lists:foldl(fun(C, Sum) -> C + Sum end, 0, L) / Length),
     io:format("~s  ~s~10.. b ~s~6..-b  ~s~6..-b  ~s~6..-b  ~s~6..-b  ~s~9.. b ~n", [
-        cake:fg(blue,string:left(X,8)), 
-        cake:fg(magenta,string:left("N: ",4)), N, 
-        cake:fg(yellow,string:left("Min: ",6)), Min, 
+        cake:fg(blue,string:left(X,8)),
+        cake:fg(magenta,string:left("N: ",4)), N,
+        cake:fg(yellow,string:left("Min: ",6)), Min,
         cake:fg(yellow,string:left("Max: ",6)), Max,
         cake:fg(yellow,string:left("Median: ",8)), Med,
         cake:fg(yellow,string:left("Avg: ",6)), Avg,
@@ -207,7 +207,7 @@ b(M, F, A, N, X) when N > 0 ->
     ]),
     erlang:garbage_collect(),
     ok.
- 
+
 loop(_M, _F, _A, 0, List) ->
     List;
 loop(M, F, A, N, List) ->
