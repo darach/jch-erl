@@ -1,40 +1,36 @@
-REBAR:=rebar
+#
+ifeq ($(wildcard rebar3),rebar3)
+REBAR = $(CURDIR)/rebar3
+endif
 
-.PHONY: all erl test clean doc 
+# Fallback to rebar on PATH
+REBAR ?= $(shell which rebar3)
+
+.PHONY: all erl test clean doc perf
 
 all: perf
 
 build:
-	$(REBAR) get-deps compile
-
-buildplt:
-	if [ ! -f .plt ]; then \
-        dialyzer --build_plt --output_plt .plt --apps kernel stdlib ; \
-    fi
-
-pltclean:
-	@rm .plt
+	$(REBAR) compile
 
 dialyze:
-	@ERL_LIBS=deps dialyzer --fullpath -Wno_undefined_callbacks \
-        --plts .plt \
-        -r ebin --src src \
-        | grep -v -f ./dialyzer.ignore-warnings
+	$(REBAR) dialyzer
 
-test: build dialyze
-	@mkdir -p .eunit
-	$(REBAR) skip_deps=true eunit ct
+test:
+	$(REBAR) eunit
 
 clean:
 	$(REBAR) clean
-	-rm -rvf deps ebin doc .eunit
+	$(REBAR) as perf clean
+	-rm -rvf doc
 	-rm -f perf/*.o
 	-rm -f perf/ch
 
 doc:
-	$(REBAR) doc
+	$(REBAR) edoc
 
-perf: test
+perf:
+	$(REBAR) as perf compile
 	gcc -c -O3 -ffast-math -std=c99 -I c_src perf/ch.c -o perf/ch.o
 	gcc -o perf/ch c_src/jch.o perf/ch.o -lm
 	perf/ch 10000000 10
@@ -45,5 +41,4 @@ perf: test
 	perf/ch 10000000 1000000
 	perf/ch 10000000 10000000
 	perf/ch 10000000 100000000
-	erlc -pa ebin -o perf perf/bench.erl
-	ERL_LIBS=deps erl +sfwi 1 +scl false -pa ebin -pa perf -noinput -eval "bench:main([])"
+	ERL_LIBS=_build/perf/lib erl +sfwi 1 +scl false -pa _build/perf/lib/jch/perf -noinput -eval "bench:main([])"

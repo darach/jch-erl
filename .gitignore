@@ -1,4 +1,9 @@
+_build
+*.d
+perf/ch
 .eunit
+priv
+doc
 deps
 *.o
 *.beam
