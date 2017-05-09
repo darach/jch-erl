@@ -21,10 +21,10 @@ test:
 
 clean:
 	$(REBAR) clean
+	$(REBAR) as perf clean
 	-rm -rvf doc
 	-rm -f perf/*.o
 	-rm -f perf/ch
-	-rm -f perf/bench.beam
 
 doc:
 	$(REBAR) edoc
@@ -41,5 +41,4 @@ perf:
 	perf/ch 10000000 1000000
 	perf/ch 10000000 10000000
 	perf/ch 10000000 100000000
-	erlc -pa _build/perf/lib/jch/ebin -o perf perf/bench.erl
-	ERL_LIBS=_build/perf/lib erl +sfwi 1 +scl false -pa perf -noinput -eval "bench:main([])"
+	ERL_LIBS=_build/perf/lib erl +sfwi 1 +scl false -pa _build/perf/lib/jch/perf -noinput -eval "bench:main([])"

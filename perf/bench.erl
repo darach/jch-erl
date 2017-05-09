@@ -44,12 +44,12 @@ main(_) ->
     % BEAM warmup. Take care of startup anomalies ...
     %
 
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10, "warmup"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10, "warmup"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10, "warmup"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10, "warmup"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10, "warmup"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10, "warmup"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000] end, 10, "warmup"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000] end, 10, "warmup"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000] end, 10, "warmup"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000] end, 10, "warmup"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000] end, 10, "warmup"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000] end, 10, "warmup"),
 
     %
     % Fundamental performance characteristics by:
@@ -61,49 +61,49 @@ main(_) ->
         cake:fg(blue,"- 100 Buckets. "),
         cake:fg(green,"Hash performance.")
         ] ),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),100] end, 10, "ch100"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),100] end, 100, "ch100"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),100] end, 1000, "ch100"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),100] end, 10000, "ch100"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),100] end, 100000, "ch100"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),100] end, 1000000, "ch100"),
-    %b(jch,ch, fun() -> [rand:uniform(1000000000),100] end, 10000000, "ch100"),
+    b(jch,ch, fun() -> [uniform(1000000000),100] end, 10, "ch100"),
+    b(jch,ch, fun() -> [uniform(1000000000),100] end, 100, "ch100"),
+    b(jch,ch, fun() -> [uniform(1000000000),100] end, 1000, "ch100"),
+    b(jch,ch, fun() -> [uniform(1000000000),100] end, 10000, "ch100"),
+    b(jch,ch, fun() -> [uniform(1000000000),100] end, 100000, "ch100"),
+    b(jch,ch, fun() -> [uniform(1000000000),100] end, 1000000, "ch100"),
+    %b(jch,ch, fun() -> [uniform(1000000000),100] end, 10000000, "ch100"),
 
     io:format("~n~n~s ~s ~n~n", [
         cake:fg(blue,"- 10K Buckets. "),
         cake:fg(green,"Hash performance.")
         ] ),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),10000] end, 10, "ch10k"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),10000] end, 100, "ch10k"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),10000] end, 1000, "ch10k"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),10000] end, 10000, "ch10k"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),10000] end, 100000, "ch10k"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),10000] end, 1000000, "ch10k"),
-    %b(jch,ch, fun() -> [rand:uniform(1000000000),10000] end, 10000000, "ch10k"),
+    b(jch,ch, fun() -> [uniform(1000000000),10000] end, 10, "ch10k"),
+    b(jch,ch, fun() -> [uniform(1000000000),10000] end, 100, "ch10k"),
+    b(jch,ch, fun() -> [uniform(1000000000),10000] end, 1000, "ch10k"),
+    b(jch,ch, fun() -> [uniform(1000000000),10000] end, 10000, "ch10k"),
+    b(jch,ch, fun() -> [uniform(1000000000),10000] end, 100000, "ch10k"),
+    b(jch,ch, fun() -> [uniform(1000000000),10000] end, 1000000, "ch10k"),
+    %b(jch,ch, fun() -> [uniform(1000000000),10000] end, 10000000, "ch10k"),
 
     io:format("~n~n~s ~s ~n~n", [
         cake:fg(blue,"- 1M Buckets. "),
         cake:fg(green,"Hash performance.")
         ] ),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10, "ch1m"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 100, "ch1m"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 1000, "ch1m"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10000, "ch1m"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 100000, "ch1m"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 1000000, "ch1m"),
-    %b(jch,ch, fun() -> [rand:uniform(1000000000),1000000] end, 10000000, "ch1m"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000] end, 10, "ch1m"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000] end, 100, "ch1m"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000] end, 1000, "ch1m"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000] end, 10000, "ch1m"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000] end, 100000, "ch1m"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000] end, 1000000, "ch1m"),
+    %b(jch,ch, fun() -> [uniform(1000000000),1000000] end, 10000000, "ch1m"),
 
     io:format("~n~n~s ~s ~n~n", [
         cake:fg(blue,"- 1B Buckets. "),
         cake:fg(green,"Hash performance.")
         ] ),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000000] end, 10, "ch1b"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000000] end, 100, "ch1b"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000000] end, 1000, "ch1b"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000000] end, 10000, "ch1b"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000000] end, 100000, "ch1b"),
-    b(jch,ch, fun() -> [rand:uniform(1000000000),1000000000] end, 1000000, "ch1b"),
-    %b(jch,ch, fun() -> [rand:uniform(1000000000),1000000000] end, 10000000, "ch1b"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000000] end, 10, "ch1b"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000000] end, 100, "ch1b"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000000] end, 1000, "ch1b"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000000] end, 10000, "ch1b"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000000] end, 100000, "ch1b"),
+    b(jch,ch, fun() -> [uniform(1000000000),1000000000] end, 1000000, "ch1b"),
+    %b(jch,ch, fun() -> [uniform(1000000000),1000000000] end, 10000000, "ch1b"),
 
     %dbg:stop(),
 
@@ -213,3 +213,11 @@ loop(_M, _F, _A, 0, List) ->
 loop(M, F, A, N, List) ->
     {T, _Result} = timer:tc(M, F, A()),
     loop(M, F, A, N - 1, [T|List]).
+
+-ifdef(rand_module).
+uniform(X) ->
+    rand:uniform(X).
+-else.
+uniform(X) ->
+    random:uniform(X).
+-endif.
