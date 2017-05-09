@@ -27,7 +27,7 @@
 {application, jch,
  [
   {description, "A Jump Consistent Hash library"},
-  {vsn, "0.1.0"},
+  {vsn, git},
   {modules, [ jch ]},
   {registered, []},
   {applications, [ kernel, stdlib ]},
