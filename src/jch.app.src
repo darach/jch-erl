@@ -35,5 +35,5 @@
 
   {maintainers, ["Darach Ennis"]},
   {licenses, ["MIT"]},
-  {links, ["https://github.com/darach/jch-erl"]}
+  {links, [{"GitHub", "https://github.com/darach/jch-erl"}]}
  ]}.
